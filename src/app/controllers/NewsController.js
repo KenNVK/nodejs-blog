@@ -1,11 +1,11 @@
 class NewsController {
 
-  // [GET] /news
+  // [GET] news
   news(req, res) {
     res.render('news');
   }
 
-  // [GET] /news/:slug
+  // [GET] news/:slug
   show(req, res) {
     res.send('News Detail')
   };
