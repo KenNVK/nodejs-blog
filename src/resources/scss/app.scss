@@ -1,14 +1,34 @@
-.card-img-top {
-  width: 100%;
-  transition: all .6s ease-in-out;
-  padding-top: 56%;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: 100% auto;
+.container {
+  max-width: 1224px;
+}
+
+.courses {
+  display: flex;
+
+  .card {
+    flex: 1;
+  }
+
+  .card-img-top {
+    width: 100%;
+    transition: all 0.6s ease-in-out;
+    padding-top: 56%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100% auto;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-text {
+    flex: 1;
+  }
 }
 
 .course-content {
-
   &__video {
     padding-top: 56.25%;
     position: relative;
@@ -29,10 +49,6 @@
 }
 
 // show hbs
-.container {
-  max-width: 1224px;
-}
-
 .coure-nav {
   background-color: #f5f5f5;
   text-align: center;
@@ -47,5 +63,38 @@
     padding: 4px 10px;
     border: none;
     border-radius: 4px;
+  }
+}
+
+.user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+// me-courses
+.me-stored-courses,
+.me-trash-courses {
+  a:hover {
+    text-decoration: none;
+  }
+
+  .oi {
+    font-size: 20px;
+    vertical-align: sub;
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+
+    .checkbox-select-all {
+      width: 160px;
+      margin: 0 16px;
+    }
+  }
+  &__trash {
+    margin-left: auto;
   }
 }
