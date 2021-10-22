@@ -1,5 +1,7 @@
 <form class="me-stored-courses" name="container-form" method="POST" action="/courses/handle-form-actions">
-  <h3 class="my-4">Khóa học của tôi</h3>
+  <a href="/me/stored/courses">
+    <h3 class="my-4">Khóa học của tôi</h3>
+  </a>
 
   <div class="me-stored-courses__toolbar mt-4">
     <div class="form-check ">
@@ -18,15 +20,30 @@
     </a>
   </div>
 
-  <table class="table mt-3">
+  <table class="table mt-3 ">
     <thead>
       <tr>
         <th scope="col">Chọn</th>
-        <th scope="col">STT</th>
-        <th scope="col">Tên khóa học</th>
-        <th scope="col">Trình độ</th>
-        <th scope="col">Thời gian tạo</th>
-        <th scope="col" colspan="2">Thời cập nhật</th>
+        <th scope="col" style="width:70px;">
+          ID
+          {{{sortable '_id' _sort}}}
+        </th>
+        <th scope="col">
+          Tên khóa học
+          {{{sortable 'name' _sort}}}
+        </th>
+        <th scope="col">
+          Trình độ
+          {{{sortable 'level' _sort}}}
+        </th>
+        <th scope="col">
+          Thời gian tạo
+          {{{sortable 'createdAt' _sort}}}
+        </th>
+        <th scope="col" colspan="2">
+          Thời cập nhật
+          {{{sortable 'updatedAt' _sort}}}
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -37,7 +54,7 @@
             <input class="form-check-input" type="checkbox" name="courseIds[]" value="{{this._id}}" autocomplete="off">
           </div>
         </td>
-        <th scope="row">{{sum @index 1}}</th>
+        <th scope="row">{{this._id}}</th>
         <td>{{this.name}}</td>
         <td>{{this.level}}</td>
         <td>{{this.createdAt}}</td>
@@ -57,6 +74,7 @@
       {{/each}}
     </tbody>
   </table>
+  </div>
 </form>
 
 {{!-- Confirm delete course --}}

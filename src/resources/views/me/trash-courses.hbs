@@ -1,5 +1,7 @@
 <form class="me-trash-courses" name="container-form" method="POST" action="/courses/handle-form-actions">
-  <h3 class="my-4">Khóa học đã xóa</h3>
+  <a href="/me/trash/courses">
+    <h3 class="my-4">Khóa học đã xóa</h3>
+  </a>
 
   <div class="me-stored-courses__toolbar mt-4">
     <div class="form-check ">
@@ -12,7 +14,7 @@
       <option value="restore">Khôi phục</option>
       <option value="deleteMany">Xóa vĩnh viễn</option>
     </select>
-    <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn disabled">Thực hiện</button>
+    <button type="submit" class="btn btn-primary btn-sm check-all-submit-btn " disabled>Thực hiện</button>
     <a href="/me/stored/courses" class="me-trash-courses__trash">
       <span class="oi oi-list"></span>
       </svg>
@@ -24,10 +26,22 @@
     <thead>
       <tr>
         <th scope="col">Chọn</th>
-        <th scope="col">STT</th>
-        <th scope="col">Tên khóa học</th>
-        <th scope="col">Trình độ</th>
-        <th scope="col" colspan="2">Thời gian xóa</th>
+        <th scope="col" style="width:70px;">
+          ID
+          {{{sortable '_id' _sort}}}
+        </th>
+        <th scope="col">
+          Tên khóa học
+          {{{sortable 'name' _sort}}}
+        </th>
+        <th scope="col">
+          Trình độ
+          {{{sortable 'level' _sort}}}
+        </th>
+        <th scope="col" colspan="2">
+          Thời gian xóa
+          {{{sortable 'deletedAt' _sort}}}
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -38,12 +52,12 @@
             <input class="form-check-input" type="checkbox" name="courseIds[]" value="{{this._id}}" autocomplete="off">
           </div>
         </td>
-        <th scope="row">{{sum @index 1}}</th>
+        <th scope="row">{{this._id}}</th>
         <td>{{this.name}}</td>
         <td>{{this.level}}</td>
         <td>{{this.deletedAt}}</td>
         <td>
-          <a class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
+          <a class="btn btn-link" data-id="{{this._id}}">Khôi phục</a>
           <a class="btn btn-link" href="#" data-toggle="modal" data-id="{{this._id}}"
             data-target="#delete-course-modal">Xóa vĩnh viễn</a>
         </td>
@@ -95,8 +109,6 @@
     var courseItemCheckbox = $('input[name="courseIds[]"]');
     var checkAllSubmitBtn = $('.check-all-submit-btn');
 
-
-
     // When dialog confirm clicked
     $('#delete-course-modal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget)
@@ -107,13 +119,6 @@
     btnDeleteCourse.click(function () {
       deleteForm.action = '/courses/' + courseId + '/force?_method=DELETE';
       deleteForm.submit();
-    });
-
-    // Restore btn clicked
-    restoreBtn.click(function () {
-      var courseId = $(this).data('id');
-      restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH';
-      restoreForm.submit();
     });
 
     // Checkbox all changed
@@ -140,5 +145,5 @@
       }
     }
   });
-  
+
 </script>
